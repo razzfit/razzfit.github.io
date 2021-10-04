@@ -5,7 +5,7 @@ function hide() {
   tabs.forEach(function (item) {
     item.classList.remove('tabheader__item_active');
   });
-  tabsContents.forEach(function(item) {
+  tabsContents.forEach(function (item) {
     item.classList.remove('tabcontent_active');
   });
 }
