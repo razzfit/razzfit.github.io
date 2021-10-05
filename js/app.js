@@ -24,12 +24,16 @@ const modal = document.querySelector('.modal');
 const btn = document.querySelectorAll('[data-call-btn]');
 const closeBtn = document.querySelector('.modal__close');
 
+function openModal() {
+  modal.classList.remove('hide');
+  document.body.style.overflow = 'hidden';
+  clearInterval(modalTimer);
+}
+
 btn.forEach(function(item) {
-  item.addEventListener('click', function() {
-    modal.classList.remove('hide');
-    document.body.style.overflow = 'hidden';
-  });
+  item.addEventListener('click', openModal);
 });
+
 
 closeBtn.addEventListener('click', hideModal);
 modal.addEventListener('click', function(event) {
@@ -49,4 +53,13 @@ function hideModal() {
   document.body.style.overflow = '';
 }
 
+const modalTimer = setTimeout(openModal, 5000);
 
+function showModalByScroll() {
+  if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+    openModal();
+    window.removeEventListener('scroll', showModalByScroll);
+  }
+}
+
+window.addEventListener('scroll', showModalByScroll);
